@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register • Instaclone</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+</head>
+
+<body>
+
+    <div class="login">
+        <h1><img src="https://i.imgur.com/wvLiKam.png" width="200px" height="68px"></h1>
+        <form action="/accounts/register/" method="post">
+            {% csrf_token %} {% for field in form %}
+            <input id="{{ field.id_for_label }}" placeholder="{{field.name}}" type="text" name="{{ field.html_name }}"> {{ field.errors }} {% endfor %}
+
+            <input type="submit" value="Create Account" /><br>
+            <input type="hidden" name="next" value="{{next}}">
+        </form>
+    </div>
+
+    <div class="infobox">
+        <p>Already have an account? <a href="/accounts/login">Sign in</a></p>
+    </div>
+
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+</body>
+
+</html>
