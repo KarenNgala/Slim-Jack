@@ -7,10 +7,11 @@ from django.dispatch import receiver
 # Create your models here.
 class Post(models.Model):
     ''' a model for Image posts '''
+    title = models.CharField(max_length=150)
     image = models.ImageField(upload_to='images/')
-    title = models.TextField()
+    live_link = models.URLField()
+    description = models.TextField(blank=True)
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
-    live_link = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
 
     def save_post(self):
@@ -31,14 +32,6 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username}'
 
-    def save_profile(self):
-        ''' method to save a user's profile '''
-        self.save()
-
-    def delete_profile(self):
-        '''method to delete a user's profile '''
-        self.delete()
-
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -49,6 +42,26 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
-class Rate(models.Model):
+
+class Rating(models.Model):
     ''' model to allow users to rate post on three categories '''
-    pass
+    Rating_CHOICES = (
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
+    (4, '4'),
+    (5, '5'),
+    (6, '6'),
+    (7, '7'),
+    (8, '8'),
+    (9, '9'),
+    (10, '10')
+    )
+    interface = models.PositiveIntegerField(choices=Rating_CHOICES, default=1)
+    experience = models.PositiveIntegerField(choices=Rating_CHOICES, default=1)
+    content = models.PositiveIntegerField(choices=Rating_CHOICES, default=1)
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.post}'s rating"
