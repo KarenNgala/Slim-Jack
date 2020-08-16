@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap');
+:root {
+    --white: #fafafa;
+    --egg-white: #efefef;
+    --grey: #717171;
+    --medium-grey: #dbdbdb;
+    --muted: #999;
+    --dark-mute: #ccc;
+    --strong-grey: #545454;
+    --header-color: #fff;
+    --text-color: #262626;
+}
+
+body {
+    font-family: 'Merienda', cursive;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    height: auto;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    /* background-color: var(--header-color); */
+}
+
+main {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    margin: 100px auto 0;
+    overflow-y: auto;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    background-color: var(--header-color);
+    border-bottom: 1px solid var(--medium-grey);
+}
+
+#logo {
+    height: 90px;
+    width: 130px;
+    padding: 0px;
+}
+
+input {
+    width: 130px;
+    height: 80%;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid var(--medium-grey);
+    background-color: var(--white);
+}
+
+nav {
+    display: inline-flex;
+}
+
+nav i {
+    margin: 5px 10px;
+    font-size: 20px;
+    color: var(--strong-grey);
+}
+
+#user {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+}
+
+#user img,
+#profile-pic img {
+    height: 100%;
+    width: 100%;
+    margin: 2px 10px;
+    border-radius: 50%;
+}
+
+.feature {
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+
+/*  */
+
+.container {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    padding: 4rem 8rem;
+    columns: 4 300px;
+    column-gap: 2rem;
+}
+
+.card img {
+    margin: 0 1rem 2rem 0;
+    display: block;
+    background: #333;
+    border-radius: 1rem;
+    border: none;
+    overflow: hidden;
+    min-height: 200px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+
+.card img:hover {
+    filter: brightness(50%);
+}
