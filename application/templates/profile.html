@@ -1,15 +1,20 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load static %}
 
+<!--  -->
+{% block styles %} {{block.super}}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}"> {% endblock %}
 <!--  -->
 {% block content %}
 <div class="container">
     <div class="top">
-        <img class="avatar" src="https://images.pexels.com/photos/3727662/pexels-photo-3727662.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="">
+        <img class="avatar" src="{{user.profile.photo.url}}" alt="">
         <div class="text">
-            <h5>Angela</h5>
-            <p> Some text holder for what someone would have as bio info</p>
+            <h3>{{user.username|upper}}</h3>
+            <p> {{user.profile.bio}}</p>
             <button>Edit profile</button>
-            <button>Log out</button>
+            <a href="{% url 'logout' %}?next=/">
+                <button>Log out</button>
+            </a>
         </div>
     </div>
 
