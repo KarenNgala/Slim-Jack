@@ -33,14 +33,14 @@ To get a copy of the project up and running on your local machine for developmen
 ```sh 
 (virtual) $ python manage.py migrate 
 ```
-4. Create admin account
-```
-(virtual) $ python manage.py createsuperuser
-```
-5. Make migrations to your database
+4. Make migrations to your database
 ```sh
 (virtual) $ python manage.py makemigrations application
 (virtual) $ python manage.py migrate
+```
+5. Create admin account
+```
+(virtual) $ python manage.py createsuperuser
 ```
 6.  Start development server
 ```
