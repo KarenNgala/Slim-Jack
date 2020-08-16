@@ -22,6 +22,12 @@ class Post(models.Model):
         '''method to delete an image post instance '''
         self.delete()
 
+    @classmethod
+    def search_project(cls, search_term):
+        ''' method to search projects by title '''
+        return cls.objects.filter(title__icontains=search_term).all()
+
+
 
 class Profile(models.Model):
     ''' extended User model '''
@@ -65,3 +71,11 @@ class Rating(models.Model):
 
     def __str__(self):
         return f"{self.post}'s rating"
+
+    def save_rating(self):
+        ''' method to save ratings '''
+        self.save()
+
+    def delete_rating(self):
+        ''' method to delete ratings '''
+        self.delete()
