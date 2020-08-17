@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% load static %}
+
+<!--  -->
+{% block styles %} {{block.super}}
+<link rel="stylesheet" href="{% static 'project.css' %}"> {% endblock %}
+<!--  -->
+{% block content %}
+<main>
+    {% for item in post %}
+    <div class="feature">
+        <h3><u>{{item.title}}</u></h3>
+        <a href="{{item.live_link}}" target="_blank">
+            <img class="image" src="{{item.image.url}}" alt="{{item.title}}" width=70%>
+        </a>
+        <p>{{item.description}}}</p>
+    </div>
+    {% endfor %}
+</main>
+{% endblock %}

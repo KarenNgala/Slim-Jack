@@ -11,7 +11,8 @@
         <div class="text">
             <h3>{{user.username|upper}}</h3>
             <p> {{user.profile.bio}}</p>
-            <button>Edit profile</button>
+            <a href="/accounts/register/complete">
+                <button>Edit profile</button></a>
             <a href="{% url 'logout' %}?next=/">
                 <button>Log out</button>
             </a>
