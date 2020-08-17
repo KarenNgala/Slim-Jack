@@ -1,0 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap');
+body {
+    font-family: 'Merienda', cursive;
+    background: url('/static/img/wallTexture.jpg');
+}

@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>New Article</title>
-    {{form.media}} {% block styles %} {% bootstrap_css %} {% endblock %}
+    {{form.media}} {% block styles %}
+    <link rel="stylesheet" href="{% static 'css/reg.css' %}"> {% bootstrap_css %} {% endblock %}
 
 </head>
 
@@ -15,7 +16,8 @@
     <div class="container">
         <div class="row">
             <div class="offset-3 col-md-6 offset-3">
-                <form action="{%url 'new_image'%}" method="post" enctype="multipart/form-data" class="pt-5">
+                <h2 class="text-center mt-3 mb-2">NEW PROJECT</h2>
+                <form action="{%url 'upload'%}" method="post" enctype="multipart/form-data">
                     {%csrf_token%} {% bootstrap_form form%}
                     <input type="submit" class="btn btn-success btn-lg" value="Post">
                 </form>

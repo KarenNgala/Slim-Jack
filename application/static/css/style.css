@@ -21,13 +21,9 @@ body {
     padding: 0;
     margin: 0;
     overflow-x: hidden;
-    /* background-color: var(--header-color); */
 }
 
 main {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     width: 100%;
     margin: 100px auto 0;
@@ -89,6 +85,9 @@ nav i {
 .feature {
     grid-row-start: 1;
     grid-row-end: 2;
+    text-align: center;
+    padding: 2rem 3rem;
+    width: 100%;
 }
 
 

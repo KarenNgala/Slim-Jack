@@ -1,10 +1,11 @@
-{% load static %} {% load bootstrap4 %}
+{% load static %} {% load bootstrap4 %} {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% block style %}
+    <link rel="stylesheet" href="{% static 'css/reg.css' %}"> {% bootstrap_css%} {% endblock %}
     <title>Success</title>
 </head>
 
@@ -12,13 +13,18 @@
     {% block content %}
     <div class="container">
         <div class="row">
-            <img src="{% static 'img/mail_box.png' %}" alt="" width="200" height="200">
-        </div>
-        <div class="row">
-            <h4 class="text-center"> You have been successfully registered. Check your email for confirmation email</h4>
-        </div>
-        <div class="row">
-            <a href="/"> <i class="fa fa-hand-point-left fa-2x" aria-hidden="true"></i> GO HOME</a>
+            <div class="col-md-4">
+                <i class="fas fa-user-cog mt-3 mb-3">/settings</i>
+                <br>
+                <small><i>Upload form as is to keep default values</i></small>
+            </div>
+            <div class="col-md-4">
+                <form method="post" class="mt-5">
+                    {% csrf_token %} {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
         </div>
     </div>
     {% endblock %}
@@ -27,7 +33,7 @@
     {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    {% endblock %}
+    {% bootstrap_javascript %} {% endblock %}
 </body>
 
 </html>
