@@ -2,15 +2,15 @@
 <!--  -->
 {% block content %}
 <main>
-    <div class="feature">
+    <!-- <div class="feature">
 
-    </div>
+    </div> -->
 
 
     <div class="container">
         {% for item in pictures %}
         <div class="card">
-            <a href="{{item.live_link}}" target="_blank">
+            <a href="project/{{item.id}}">
                 <img alt="project post" src="{{item.image.url}}">
             </a>
         </div>
