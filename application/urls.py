@@ -10,6 +10,8 @@ urlpatterns=[
     url(r'^accounts/register/complete/$', views.edit_profile, name='edit_profile'),
     url(r'^upload/$', views.upload, name='upload'),
     url(r'^search/', views.search, name='search'),
+    url(r'^api/posts/$', views.PostList.as_view()),
+    url(r'^api/profiles/$', views.ProfileList.as_view()),
 ]
 
 if settings.DEBUG:

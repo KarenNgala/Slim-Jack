@@ -2,7 +2,11 @@ from django.shortcuts import render, redirect
 from .models import Post, Profile, Rating
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import EditProfile, uploadForm
+from .forms import EditProfile, uploadForm, rateProject
+from django.db.models import Avg
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import PostSerializer, ProfileSerializer
 
 
 # Create your views here.
@@ -22,9 +26,22 @@ def profile(request):
 @login_required(login_url='/accounts/login/')
 def project(request, id):
     current_user = request.user.profile
-    post = Post.objects.filter(id=id).all()
-    rate = Rating.objects.filter(post=post).all()
-    return render(request, 'project.html', {'post':post, 'rate':rate})
+    project = Post.objects.filter(id=id).all()
+    rate = Rating.objects.filter(post=id).all()
+    if Rating.objects.filter(user=current_user, post=id).first() is None : #user has not voted
+        if request.method == 'POST':
+            form = rateProject(request.POST)
+            if form.is_valid():
+                rate = form.save(commit=False)
+                rate.user = current_user
+                rate.post = project
+                rate.save()
+
+            posts = (Post.objects.filter(status=True).annotate(avg_rate=Avg('Rating.map_set')))    
+            return redirect(request.path)
+        else:
+            form = rateProject()
+        return render(request, 'project.html', {'post':project, 'rate':rate})
 
 
 @login_required(login_url='/accounts/login/')
@@ -62,3 +79,15 @@ def search(request):
         return render(request, 'search.html', {'res':res})
     else:
         return render(request, 'index.html')
+
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        all_users = Profile.objects.all()
+        serializers = ProfileSerializer(all_users, many=True)
+        return Response(serializers.data)
+
+class PostList(APIView):
+    def get(self, request, format=None):
+        all_posts = Post.objects.all()
+        serializers = PostSerializer(all_posts, many=True)
+        return Response(serializers.data)
