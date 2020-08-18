@@ -1,8 +1,8 @@
-{% extends 'base.html' %} {% load static %}
+{% extends 'base.html' %} {% load static %}{% load bootstrap4 %} {% load crispy_forms_tags %}
 
 <!--  -->
 {% block styles %} {{block.super}}
-<link rel="stylesheet" href="{% static 'project.css' %}"> {% endblock %}
+<link rel="stylesheet" href="{% static 'project.css' %}"> {{bootstrap_css}} {% endblock %}
 <!--  -->
 {% block content %}
 <main>
@@ -12,8 +12,35 @@
         <a href="{{item.live_link}}" target="_blank">
             <img class="image" src="{{item.image.url}}" alt="{{item.title}}" width=70%>
         </a>
-        <p>{{item.description}}}</p>
+        <p>{{item.description}}</p>
+
+        <hr>
+
+        <div>
+            <form action="#" method="POST">
+                <h2>VOTING FORM</h2>
+                {%csrf_token%}
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ form.interface|as_crispy_field:"bootstrap" }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                        {{ form.experience|as_crispy_field:"bootstrap" }}
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        {{ form.content|as_crispy_field:"bootstrap" }}
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-success" value="Post">
+            </form>
+
+            {% if average %} {% for total in average %} {{total.avg_interface}} {{total.avg_experience}} {{total.avg_content}} {% endfor %} {% else %}
+            <p>You are yet to vote on this project</p> {% endif %}
+        </div>
     </div>
     {% endfor %}
 </main>
 {% endblock %}
+
+<!--  -->
+{% block scripts %}{{block.super}} {{bootstrap_javascript}} {% endblock %}

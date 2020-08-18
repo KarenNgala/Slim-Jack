@@ -27,7 +27,7 @@ def profile(request):
 def project(request, id):
     current_user = request.user.profile
     project = Post.objects.filter(id=id).all()
-    rate = Rating.objects.filter(post=id).all()
+    rate = Rating.objects.filter(post=id).first()
     if Rating.objects.filter(user=current_user, post=id).first() is None : #user has not voted
         if request.method == 'POST':
             form = rateProject(request.POST)
@@ -36,12 +36,10 @@ def project(request, id):
                 rate.user = current_user
                 rate.post = project
                 rate.save()
-
-            posts = (Post.objects.filter(status=True).annotate(avg_rate=Avg('Rating.map_set')))    
-            return redirect(request.path)
+            return redirect('project')
         else:
             form = rateProject()
-        return render(request, 'project.html', {'post':project, 'rate':rate})
+        return render(request, 'project.html', {'post':project, 'rate':rate, 'form':form})
 
 
 @login_required(login_url='/accounts/login/')
@@ -80,11 +78,13 @@ def search(request):
     else:
         return render(request, 'index.html')
 
+
 class ProfileList(APIView):
     def get(self, request, format=None):
         all_users = Profile.objects.all()
         serializers = ProfileSerializer(all_users, many=True)
         return Response(serializers.data)
+
 
 class PostList(APIView):
     def get(self, request, format=None):
