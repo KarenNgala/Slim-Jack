@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% load static%}
+
+<!--  -->
+{% block content %}
+<main>
+    <div class="feature">
+        {% if res %} {% for item in res %}
+        <h3><u>{{item.title}}</u></h3>
+        <a href="{{item.live_link}}" target="_blank">
+            <img class="image" src="{{item.image.url}}" alt="{{item.title}}" width=70%>
+        </a>
+        <p>{{item.description}}}</p>
+        {% endfor %} {% else %}
+        <p>Sorry, mate! We can't seem to find what you are looking for</p>
+        <img src="{% static 'img/search.png' %}" alt="" width=80% height=65%> {% endif %}
+    </div>
+</main>
+{% endblock %}

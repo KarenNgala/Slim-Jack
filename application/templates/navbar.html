@@ -1,7 +1,19 @@
 {% load static %}
+<style>
+    .btn-default {
+        display: none;
+    }
+</style>
 <header>
     <img src="{% static 'img/logo.jpeg' %}" id="logo" height="50">
-    <input type="text" placeholder="SEARCH">
+    <form class="navbar-form" role="search" action="{% url 'search' %}">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="project">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"></button>
+            </div>
+        </div>
+    </form>
     <nav>
         <a href="{% url 'feed' %}"><i class='fas fa-house-user'></i></a>
         <a href="{% url 'upload' %}"><i class='fas fa-folder-plus'></i></a>

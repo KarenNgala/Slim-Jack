@@ -8,7 +8,8 @@ urlpatterns=[
     url(r'^profile/$', views.profile, name='profile'),
     url(r'^project/(\d+)/$', views.project, name='project'),
     url(r'^accounts/register/complete/$', views.edit_profile, name='edit_profile'),
-    url(r'upload/$', views.upload, name='upload'),
+    url(r'^upload/$', views.upload, name='upload'),
+    url(r'^search/', views.search, name='search'),
 ]
 
 if settings.DEBUG:

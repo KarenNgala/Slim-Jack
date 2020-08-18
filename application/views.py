@@ -53,3 +53,12 @@ def upload(request):
     else:
         form = uploadForm()
     return render(request, 'upload.html', {'form':form})
+
+
+def search(request):
+    if 'project' in request.GET and request.GET['project']:
+        search_term = request.GET.get('project')
+        res = Post.search_project(search_term)
+        return render(request, 'search.html', {'res':res})
+    else:
+        return render(request, 'index.html')
